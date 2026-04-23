@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Профиль</title>
+
+<style>
+body {
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1abc9c, #2ecc71);
+    margin: 0;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    color: green;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333;
+}
+
+/* 🔥 TOAST */
+.toast {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2ecc71;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: top 0.5s ease;
+    z-index: 1000;
+}
+
+.toast.show {
+    top: 20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🔔 Уведомление -->
+<div id="toast" class="toast">Аккаунт успешно создан 🎉</div>
+
+<div class="card">
+    <h2 id="success"></h2>
+    <p><b>Username:</b> <span id="username"></span></p>
+    <p><b>Email:</b> <span id="email"></span></p>
+
+    <button onclick="logout()">Выйти</button>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (user) {
+    // 🔥 показываем toast
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+
+    // данные пользователя
+    document.getElementById("success").textContent = "Аккаунт успешно создан 🎉";
+    document.getElementById("username").textContent = user.username;
+    document.getElementById("email").textContent = user.email;
+} else {
+    document.getElementById("success").textContent = "Нет данных!";
+}
+
+function logout() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
